@@ -19,7 +19,7 @@ const Parent = () => {
   const handleCompleteTodo = (todoId) => {
     setTodos((prevTodos) =>
       prevTodos.map((todo) => {
-        if (todo.id === todoId && !todo.completed) {
+        if (todo.id === todoId) {
           return { ...todo, completed: true };
         }
         return todo;
@@ -44,12 +44,11 @@ const Child = ({ todos, handleCompleteTodo }) => {
           <ul>
             <li>
               <span>{todo.title}</span>
-              <button
-                onClick={() => handleCompleteTodo(todo.id)}
-                hidden={todo.completed}
-              >
-                Complete
-              </button>
+              {!todo.completed && (
+                <button onClick={() => handleCompleteTodo(todo.id)}>
+                  Complete
+                </button>
+              )}
             </li>
           </ul>
         </div>
