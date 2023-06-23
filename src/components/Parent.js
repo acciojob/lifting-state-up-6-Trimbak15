@@ -3,23 +3,23 @@ import React, { useState } from "react";
 const Parent = () => {
   const [todos, setTodos] = useState([
     {
-        id:1,
-        title: "Learn React",
+      id: 1,
+      title: "Learn React",
     },
     {
-        id:2,
-        title : "Build React App"
+      id: 2,
+      title: "Build React App",
     },
     {
-        id:3,
-        title: "Deploy react App"
+      id: 3,
+      title: "Deploy React App",
     },
   ]);
 
   const handleCompleteTodo = (todoId) => {
     setTodos((prevTodos) =>
       prevTodos.map((todo) => {
-        if (todo.id === todoId) {
+        if (todo.id === todoId && !todo.completed) {
           return { ...todo, completed: true };
         }
         return todo;
@@ -43,13 +43,15 @@ const Child = ({ todos, handleCompleteTodo }) => {
         <div key={todo.id} className="todo">
           <ul>
             <li>
-            <span>{todo.title}</span>
-            <button
-            onClick={() => handleCompleteTodo(todo.id)}
-            hidden={todo.completed}>Complete</button>
+              <span>{todo.title}</span>
+              <button
+                onClick={() => handleCompleteTodo(todo.id)}
+                hidden={todo.completed}
+              >
+                Complete
+              </button>
             </li>
           </ul>
-          
         </div>
       ))}
     </div>
